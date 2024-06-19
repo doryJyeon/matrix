@@ -1,0 +1,307 @@
+@charset "UTF-8";
+
+/*행렬계산기 css*/
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poor Story', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: fit-content;
+  font-size: 20px;
+  background-color: #050505;
+}
+
+.all_box {
+  width: 1000px;
+  padding: 2px calc((100% - 1000px) / 2);
+  min-height: 100%;
+  margin: 0 auto;
+  color: #0a0a0a;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+
+/*header 부분*/
+.head_size {
+  width: 1000px;
+  height: 80px;
+  margin: 0px;
+  position: relative;
+}
+
+.head_size .dino_green {
+  width: 70px;
+  height: 70px;
+  margin: 5px 55px 5px 100px;
+  float: left;
+}
+
+.head_size .title_word {
+  width: 70px;
+  height: 70px;
+  margin: 5px 20px;
+  font-size: 40px;
+  line-height: 68px;
+  color: #fefeff;
+  background-image: url("../img/buble.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  float: left;
+  font-weight: bold;
+}
+
+.head_size .orange {
+  width: 60px;
+  height: 60px;
+  margin: 15px 105px 5px 60px;
+}
+
+/*section1 박스 만드는 부분*/
+.in_matrix {
+  width: 1000px;
+  height: 340px;
+  margin: 0px;
+  float: left;
+  display: relative;
+  /*연산 버튼 부분*/
+}
+
+.in_matrix .make_matrix1 {
+  width: 420px;
+  height: 340px;
+  margin: 0px;
+  float: left;
+  background-color: #0be254;
+  position: relative;
+  /*행렬 박스 만드는 부분 단어, input, 버튼 부분들*/
+  /*박스 출력될 부분*/
+}
+
+.in_matrix .make_matrix1 .input_size {
+  width: 420px;
+  height: 60px;
+  margin: 0px;
+}
+
+.in_matrix .make_matrix1 .input_size .input_words {
+  width: 30px;
+  height: 20px;
+  margin: 20px 10px 20px 30px;
+  font-weight: bold;
+  color: #001908;
+}
+
+.in_matrix .make_matrix1 .input_size .input_boxs {
+  width: 50px;
+  height: 20px;
+  margin: 20px 0px;
+  padding-left: 5px;
+  border: 0px;
+  border-radius: 2px;
+  font-family: 'Poor Story', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #001908;
+}
+
+.in_matrix .make_matrix1 .input_size .make_box_btn {
+  width: 98px;
+  height: 26px;
+  margin: 16px 25px 16px 35px;
+  border: 1px solid #0c2596;
+  border-radius: 4px;
+  background-color: #59c3e6;
+  color: #001015;
+  font-family: 'Poor Story', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  transition: all 0.35s linear;
+}
+
+.in_matrix .make_matrix1 .input_size .make_box_btn:hover {
+  color: #dae0fd;
+  background-color: #2545dc;
+}
+
+.in_matrix .make_matrix1 .input_box1 {
+  width: 420px;
+  height: 280px;
+  position: relative;
+  background-color: #59c3e6;
+}
+
+.in_matrix .make_matrix1 .input_box1 .box_position {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.in_matrix .make_matrix1 .input_box1 .one_box {
+  width: 52px;
+  height: 30px;
+  margin: 5px;
+  border: 0px;
+  border-radius: 2px;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.in_matrix .oper_symbol {
+  width: 160px;
+  height: 280px;
+  float: left;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.in_matrix .oper_symbol .event_btn {
+  width: 100px;
+  height: 50px;
+  border: 2px solid #00a136;
+  border-radius: 8px;
+  margin: 10px 30px;
+  float: left;
+  padding: 0px;
+  background-color: #56ed89;
+  font-size: 22px;
+  line-height: 47px;
+  font-family: 'Poor Story', sans-serif;
+  font-weight: bold;
+  color: #001908;
+  transition: all 0.3s linear;
+}
+
+.in_matrix .oper_symbol .event_btn:hover {
+  background-color: #59c3e6;
+  border-color: #2545dc;
+  color: #010517;
+}
+
+/*section2 계산 결과 부분*/
+.position_re {
+  position: relative;
+  width: 1000px;
+  height: 50px;
+  float: left;
+  margin-top: 5px;
+}
+
+.position_re .result_but {
+  width: 1000px;
+  height: 50px;
+  font-size: 30px;
+  position: relative;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  float: left;
+}
+
+.position_re .result_but .small_fruit {
+  width: 44px;
+  height: 44px;
+  margin: 3px 0px 3px 212px;
+  float: left;
+}
+
+.position_re .result_but .s_fruit2 {
+  margin: 3px 0px 3px 0px;
+}
+
+.position_re .result_but .under_arrow {
+  width: 400px;
+  height: 40px;
+  line-height: 40px;
+  float: left;
+  margin: 10px 50px 0px;
+  font-family: 'Poor Story', sans-serif;
+  word-spacing: 8px;
+  font-weight: bold;
+  color: blue;
+  background-color: gold;
+  border-radius: 2px;
+}
+
+.position_re .result_but .ran_numb {
+  width: 138px;
+  height: 36px;
+  text-align: center;
+  font-family: 'Poor Story', sans-serif;
+  line-height: 25px;
+  font-size: 20px;
+  margin-top: 14px;
+  border: 3px dotted green;
+  border-radius: 2px;
+  background-color: #0be254;
+  color: #010101;
+  font-weight: bold;
+  transition: all 0.25s linear;
+}
+
+.position_re .result_but .ran_numb:hover {
+  background-color: orange;
+}
+
+/*section3 계산된 박스 부분*/
+.result_box {
+  width: 1000px;
+  height: 430px;
+  position: relative;
+  float: left;
+}
+
+.result_box .one_box {
+  width: 80px;
+  height: 40px;
+  margin: 5px;
+  border: 0px;
+  border-radius: 2px;
+  text-align: right;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.result_box .re_boxss {
+  width: 700px;
+  height: 400px;
+  background-color: #59c3e6;
+  margin: 15px 150px 15px 150px;
+  border-radius: 3px;
+}
+
+.result_box .re_boxss .box_position {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.result_box .bic_fruit {
+  width: 68px;
+  height: 68px;
+  margin: 2px;
+  float: left;
+  position: absolute;
+  z-index: 100;
+  bottom: 0.5%;
+  left: 5px;
+}
+
+.result_box .blue_dino {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  z-index: 100;
+  bottom: 2.5%;
+  right: 5px;
+}
+
+/*# sourceMappingURL=matrix_css.css.map */

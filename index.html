@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<title>행렬계산기</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+		rel="stylesheet">
+	<link href="./all_css/matrix_css.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="all_box">
+		<header class="head_size">
+			<img class="dino_green" src="./img/green_dino.png" alt="보글보글 초록색 공룡 그림" />
+			<p class="title_word">행</p>
+			<p class="title_word">렬</p>
+			<p class="title_word">계</p>
+			<p class="title_word">산</p>
+			<p class="title_word">기</p>
+			<img class="dino_green orange" src="./img/orange.png" alt="8-bit 오렌지 그림" />
+		</header>
+		<section class="in_matrix"> <!--행, 열 입력부분-->
+			<section class="make_matrix1"> <!--왼쪽(행렬 1) 입력부분-->
+				<article class="input_size">
+					<label for="in_line1" class="input_words">행</label>
+					<input id="in_line1" class="input_boxs" type="number" min="1" max="6" autofocus tabindex="10">
+					<label for="in_row1" class="input_words">열</label>
+					<input id="in_row1" class="input_boxs" type="number" min="1" max="6" tabindex="20">
+					<button id="make_btn1" class="make_box_btn" tabindex="30">만들기</button>
+				</article>
+				<article class="input_box1">
+					<div id="drop_box1" class="box_position">
+						<!--계산 값을 입력할 input 출력 영역-->
+					</div>
+				</article>
+			</section>
+			<article class="oper_symbol"> <!--덧셈, 뺄셈, 곱셈 버튼 선택부분-->
+				<button id="plus_btn" class="event_btn">+</button>
+				<button id="minus_btn" class="event_btn">-</button>
+				<button id="multiply_btn" class="event_btn">*</button>
+				<button id="reset_btn" class="event_btn">초기화</button>
+			</article>
+			<section class="make_matrix1"> <!--오른쪽(행렬 2) 입력부분-->
+				<article class="input_size">
+					<label for="in_line2" class="input_words">행</label>
+					<input id="in_line2" class="input_boxs" type="number" min="1" max="6" tabindex="40">
+					<label for="in_row2" class="input_words">열</label>
+					<input id="in_row2" class="input_boxs" type="number" min="1" max="6" tabindex="50">
+					<button id="make_btn2" class="make_box_btn" tabindex="60">만들기</button>
+				</article>
+				<article class="input_box1">
+					<div id="drop_box2" class="box_position">
+						<!--계산 값을 입력할 input 출력 영역-->
+					</div>
+				</article>
+			</section>
+		</section>
+		<section class="position_re"> <!--계산 결과 부분 / 랜덤버튼-->
+			<article class="result_but">
+				<img class="small_fruit" src="./img/cherry.png" alt="8-bit 체리 그림" />
+				<p class="under_arrow">&dharl; &nbsp; 계산 결과 &nbsp; &dharr;</p>
+				<img class="small_fruit s_fruit2" src="./img/banana.png" alt="8-bit 바나나 그림" />
+				<button id="random_set" class="ran_numb">random 숫자</button>
+			</article>
+		</section>
+		<section class="result_box"> <!--결과값 출력 부분-->
+			<article class="re_boxss">
+				<div id="result_box" class="box_position">
+					<!--계산된 input 출력 영역-->
+				</div>
+			</article>
+			<section>
+				<!--결과값 박스 옆 과일 이미지와 공룡-->
+				<img class="bic_fruit" src="./img/watermelon.png" alt="8-bit 수박 그림" />
+				<img class="blue_dino" src="./img/blue_dino.png" alt="보글보글 파란색 공룡 그림" />
+			</section>
+		</section>
+	</div>
+
+	<script>
+		let onload_main = () => {
+			function make_boxss(sel_boxsize, sel_yfild, sel_xrow) {
+				this.y_fild = document.getElementById(sel_yfild).value;
+				this.x_row = document.getElementById(sel_xrow).value;
+				this.box_size = document.getElementById(sel_boxsize);   //행렬 출력부분 아이디
+				this.matrix_array = [];
+				let y_fild2 = document.getElementById("in_line2").value; //연산시 사용할 양쪽 행렬 크기 비교값
+				let x_row2 = document.getElementById("in_row2").value;
+				let make_line1 = 0;
+				let make_line2 = 0;
+
+				this.clear_value = function () {
+					document.getElementById("in_line1").value = null;
+					document.getElementById("in_row1").value = null;
+					document.getElementById("in_line2").value = null;
+					document.getElementById("in_row2").value = null;
+					this.box_size.innerHTML = "";
+					document.getElementById("drop_box1").innerHTML = "";
+					document.getElementById("drop_box2").innerHTML = "";
+				}
+
+				this.matrix_set = function (sel_method) {   //2차원 배열 만들기
+					let y_input_value = (this.y_fild > 6) && (alert("최대 행값은 6입니다."));
+					let x_input_value = (this.x_row > 6) && (alert("최대 열값은 6입니다."));
+
+					if (y_input_value == false && x_input_value == false) {
+						let k = 0;
+						while (k < this.y_fild) {   //행 값 만큼 1차원 배열 만들어주기
+							this.matrix_array.push([]);
+							k += 1;
+						}
+						let i = 0;
+						while (i < this.y_fild) {   //2차원 배열 만들기
+							let j = 0;
+							while (j < this.x_row) {
+								(sel_method == 'reset_array') && (this.matrix_array[i][j] = 0);
+								(sel_method == 'random_array') && (this.matrix_array[i][j] = Math.floor(Math.random() * 1000)); //0~999사이의 랜덤 수 만들기
+								j += 1;
+							}
+							i += 1;
+						}
+					}
+				}
+
+				this.make_box = function (div_input) {
+					this.box_size.innerHTML = ""; 	//행렬 출력부분 초기화
+					if (div_input == "type_input") {
+						this.box_size.style.width = this.x_row * 62 + "px";      //행렬 출력부분 넓이 조정
+						this.box_size.style.height = this.y_fild * 40 + "px";    //행렬 출력부분 높이 조정
+						this.box_size.style.marginLeft = "-" + this.x_row * 31 + "px";  //출력물을 가운데로 오게 하기위한 -마진값
+						this.box_size.style.marginTop = "-" + this.y_fild * 20 + "px";
+					}
+					if (div_input == "type_div") {
+						this.box_size.style.width = this.x_row * 90 + "px";
+						this.box_size.style.height = this.y_fild * 50 + "px";
+						this.box_size.style.marginLeft = "-" + this.x_row * 45 + "px";
+						this.box_size.style.marginTop = "-" + this.y_fild * 25 + "px";
+					}
+					this.matrix_array.forEach((f_value, f_index) => {       //2차원 배열값 가져와서 input에 입력 후 출력하기
+						f_value.forEach((value, index) => {
+							(div_input == "type_input") && (this.box_size.innerHTML += '<input id = "' + sel_boxsize + f_index + index + '" class = "one_box" type = "number" min = "0" max = "999" value = "' + value + '">');
+							(div_input == "type_div") && (this.box_size.innerHTML += '<input id = "' + sel_boxsize + f_index + index + '" class = "one_box" type = "text" value = "' + value + '">');
+						})
+					});
+				}
+
+				this.value_calculation = function (operation, plus_or_minus) { //id를 가져와 배열에 넣어 계산 하는 펑션. 
+					let one_array = []; //행렬 박스 1의 입력값을 담을 배열
+					let two_array = []; //행렬 박스 2의 입력값을 담을 배열
+					let result_value = 0;     //곱셈 값을 누적으로 더해줄 때 사용할 변수
+					let multip_array = [];    //곱셈 값을 담을 배열
+					let k = i = j = 0;      //forEach || while용 변수
+
+					while (k < this.y_fild) {   //행값만큼 1차원 배열을 만들어줌
+						one_array.push([]);     //input1의 행렬 배열
+						multip_array.push([]);
+						k += 1;
+					}
+					k = 0;
+					while (k < y_fild2) {
+						two_array.push([]);     //input2의 행렬 배열
+						k += 1;
+					}
+					one_array.forEach((one_value, one_index) => {  //행렬1의 입력된 값을 2차원 배열로 만들기
+						j = 0;
+						while (j < this.x_row) {
+							(one_index == i) && (one_value.push(document.getElementById("drop_box1" + i + j).value));
+							j += 1;
+						}
+						i += 1;
+					});
+					i = 0;
+					two_array.forEach((two_value, two_index) => {   //행렬2의 입력된 값을 2차원 배열로 만들기
+						j = 0;
+						while (j < x_row2) {
+							(two_index == i) && (two_value.push(document.getElementById("drop_box2" + i + j).value));
+							j += 1;
+						}
+						i += 1;
+					});
+
+					if (operation == "plus_minus") {     //덧셈 뺄셈 계산 부분
+						if (this.y_fild == y_fild2 && this.x_row == x_row2) {
+							i = 0;
+							while (i < this.y_fild) {
+								j = 0;
+								while (j < this.x_row) {
+									let result_id = document.getElementById("result_box" + i + j);
+									(plus_or_minus == "plus") && (result_id.value = Number(one_array[i][j]) + Number(two_array[i][j]));
+									(plus_or_minus == "minus") && (result_id.value = Number(one_array[i][j]) - Number(two_array[i][j]));
+									j += 1;
+								}
+								i += 1;
+							}
+						} else {
+							alert("양 행렬의 크기가 같아야합니다.");
+							this.box_size.style.width = "200px";
+							this.box_size.style.height = "50px";
+							this.box_size.style.marginLeft = "-100px";
+							this.box_size.style.marginTop = "-25px";
+							this.box_size.innerHTML = "계산 할 수 없습니다.";
+						}
+					}
+
+					if (operation == "multiply") {
+						if (this.x_row == y_fild2) {
+							i = 0;
+							while (i < one_array.length) {
+								k = 0;
+								while (k < x_row2) {
+									j = 0;
+									result_value = 0;
+									while (j < two_array.length) {
+										result_value = result_value + eval(one_array[i][j] * two_array[j][k]);
+										j += 1;
+									}
+									document.getElementById("result_box" + i + k).value = result_value;
+									k += 1;
+								}
+								i += 1;
+							}
+						} else {
+							alert('좌측의 열 크기와 우측의 행 크기가 같아야합니다.');
+							this.box_size.style.width = "200px";
+							this.box_size.style.height = "50px";
+							this.box_size.style.marginLeft = "-100px";
+							this.box_size.style.marginTop = "-25px";
+							this.box_size.innerHTML = "계산 할 수 없습니다.";
+						}
+					}
+				}
+			}
+
+
+			this.addEventListener("click", (e) => {     //클릭 이벤트 발생시 선택용 스위치
+				let make_make1 = new make_boxss("drop_box1", "in_line1", "in_row1");
+				let make_make2 = new make_boxss("drop_box2", "in_line2", "in_row2");
+				let result_box = new make_boxss("result_box", "in_line1", "in_row1");
+				let multip_box = new make_boxss("result_box", "in_line1", "in_row2");
+				let reset_btn = new make_boxss("result_box", "in_line1", "in_row1");
+
+				switch (e.target.id) {
+					case 'make_btn1':
+						make_make1.matrix_set("reset_array");
+						make_make1.make_box("type_input");
+						break;
+					case 'make_btn2':
+						make_make2.matrix_set("reset_array");
+						make_make2.make_box("type_input");
+						break;
+					case 'random_set':
+						make_make1.matrix_set("random_array");
+						make_make1.make_box("type_input");
+						make_make2.matrix_set("random_array");
+						make_make2.make_box("type_input");
+						break;
+					case 'plus_btn':
+						result_box.matrix_set("reset_array");
+						result_box.make_box("type_div");
+						result_box.value_calculation("plus_minus", "plus");
+						break;
+					case 'minus_btn':
+						result_box.matrix_set("reset_array");
+						result_box.make_box("type_div");
+						result_box.value_calculation("plus_minus", "minus");
+						break;
+					case 'multiply_btn':
+						multip_box.matrix_set("reset_array");
+						multip_box.make_box("type_div");
+						result_box.value_calculation("multiply");
+						break;
+					case 'reset_btn':
+						reset_btn.clear_value();
+						break;
+				}
+			});
+		};
+
+		onload = () => {
+			onload_main();
+		};
+	</script>
+</body>
+
+</html>
