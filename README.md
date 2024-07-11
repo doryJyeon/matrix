@@ -10,8 +10,9 @@ HTML + css + JavaScript 로 제작했습니다.
 
 (직접 입력도 가능합니다.)
 
-## 더하기 / 빼기 Gif
-![plus_minus](https://github.com/doryJyeon/matrix/assets/125242321/bb11e790-0f76-4219-8272-63fd02d0797a)
+##구현 화면
+### 더하기 / 빼기
+![plus_minus](https://github.com/doryJyeon/matrix/assets/125242321/453a9bc7-f18a-47c0-a9d6-092e2b499ff3)
 
-## 곱하기 Gif
-![multip](https://github.com/doryJyeon/matrix/assets/125242321/16be6ea5-8ec6-443e-9b5b-a2f525482063)
+### 곱하기
+![multip](https://github.com/doryJyeon/matrix/assets/125242321/85eb3089-8beb-4615-bc60-2295351ccfee)
